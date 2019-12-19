@@ -124,6 +124,7 @@ Output of the above code is...
 5.  [shrink_to_fit()](https://en.cppreference.com/w/cpp/container/vector/shrink_to_fit)  – Reduces the capacity of the container to fit its size and destroys all elements beyond the capacity.
 
 **Element Access:** Used to access elements from a certain vector.
+
 6.  [operator []](https://en.cppreference.com/w/cpp/container/vector/operator_at)  – Returns a reference to the element at position ‘g’ in the vector.
 7.  [at(g)](https://en.cppreference.com/w/cpp/container/vector/at)  – Returns a reference to the element at position ‘g’ in the vector.
 8.  [front()](https://en.cppreference.com/w/cpp/container/vector/front)  – Returns a reference to the first element in the vector.
@@ -131,6 +132,7 @@ Output of the above code is...
 10.  [data()](https://en.cppreference.com/w/cpp/container/vector/data)  – Returns a direct pointer to the memory array used internally by the vector to store its owned elements.
 
 **Modifiers:** Used to modify a certain vector.
+
 11.  [assign()](https://www.geeksforgeeks.org/vector-assign-in-c-stl/) – It assigns new value to the vector elements by replacing old ones.
 12.  [push_back()](https://en.cppreference.com/w/cpp/container/vector/push_back)  – It push the elements into a vector from the back.
 13.  [pop_back()](https://en.cppreference.com/w/cpp/container/vector/pop_back)  – It is used to pop or remove elements from a vector from the back.
