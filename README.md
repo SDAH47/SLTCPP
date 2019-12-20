@@ -2,7 +2,7 @@
 Hello there! It's SD Asif Hossein. Today I am going to talk about the use of STL  aka Standard Template Library of C++. See, C++ has a very powerful, robust Library system which allows us to do lots of magical stuffs like holding multiple data types in one variable, multi-threading, Dynamic Array manipulation etc. In this amazing world of C++ STL, let's know some of them deeply and clearly.
 
 ## Dynamic Array Manipulation with std::vector
-At first lets talk about one of favorite STL class, the std::vector. **Vectors are same as dynamic arrays with the ability to resize itself automatically when an element is inserted or deleted, with their storage being handled automatically by the container.** Vector elements are placed in contiguous storage so that they can be accessed and traversed using iterators. In vectors, data is inserted at the end. Inserting at the end takes differential time, as sometimes there may be a need of extending the array. Removing the last element takes only constant time because no resizing happens. Inserting and erasing at the beginning or in the middle is linear in time.
+At first let's talk about one of favorite STL class, the std::vector. **Vectors are same as dynamic arrays with the ability to resize itself automatically when an element is inserted or deleted, with their storage being handled automatically by the container.** Vector elements are placed in contiguous storage so that they can be accessed and traversed using iterators. In vectors, data is inserted at the end. Inserting at the end takes differential time, as sometimes there may be a need of extending the array. Removing the last element takes only constant time because no resizing happens. Inserting and erasing at the beginning or in the middle is linear in time.
 
 Let's consider following example...
 
@@ -134,6 +134,7 @@ Aliased as member type  vector::allocator_type.
 5.  [shrink_to_fit()](https://en.cppreference.com/w/cpp/container/vector/shrink_to_fit)  – Reduces the capacity of the container to fit its size and destroys all elements beyond the capacity.
 
 **Element Access:** Used to access elements from a certain vector.
+
 6.  [operator []](https://en.cppreference.com/w/cpp/container/vector/operator_at)  – Returns a reference to the element at position ‘g’ in the vector.
 7.  [at(g)](https://en.cppreference.com/w/cpp/container/vector/at)  – Returns a reference to the element at position ‘g’ in the vector.
 8.  [front()](https://en.cppreference.com/w/cpp/container/vector/front)  – Returns a reference to the first element in the vector.
@@ -141,6 +142,7 @@ Aliased as member type  vector::allocator_type.
 10.  [data()](https://en.cppreference.com/w/cpp/container/vector/data)  – Returns a direct pointer to the memory array used internally by the vector to store its owned elements.
 
 **Modifiers:** Used to modify a certain vector.
+
 11.  [assign()](https://www.geeksforgeeks.org/vector-assign-in-c-stl/) – It assigns new value to the vector elements by replacing old ones.
 12.  [push_back()](https://en.cppreference.com/w/cpp/container/vector/push_back)  – It push the elements into a vector from the back.
 13.  [pop_back()](https://en.cppreference.com/w/cpp/container/vector/pop_back)  – It is used to pop or remove elements from a vector from the back.
@@ -153,6 +155,7 @@ Aliased as member type  vector::allocator_type.
 20.  [emplace_back()](https://en.cppreference.com/w/cpp/container/vector/emplace_back)  – It is used to insert a new element into the vector container, the new element is added to the end of the vector.
 
 **Iterators:** Used to work with the vector iterators.
+
 21.  [begin()](http://www.cplusplus.com/reference/vector/vector/begin/)  – Returns an iterator pointing to the first element in the vector
 22.  [end()](http://www.cplusplus.com/reference/vector/vector/end/)  – Returns an iterator pointing to the theoretical element that follows the last element in the vector
 23.  [rbegin()](http://www.cplusplus.com/reference/vector/vector/rbegin/)  – Returns a reverse iterator pointing to the last element in the vector (reverse beginning). It moves from last to first element
@@ -163,6 +166,7 @@ Aliased as member type  vector::allocator_type.
 28.  [crend()](http://www.cplusplus.com/reference/vector/vector/crend/)  – Returns a constant reverse iterator pointing to the theoretical element preceding the first element in the vector (considered as reverse end)
 
 **Allocator:** Used for dynamic allocation.
+
 29. [get_allocator()](http://www.cplusplus.com/reference/vector/vector/get_allocator/) - Returns a copy of the allocator object associated with the [vector](http://www.cplusplus.com/vector).
 
 ## Unique Dynamic Array Manipulation with std::set
@@ -345,11 +349,13 @@ Aliased as member type  set::allocator_type.
 
 ### Short description of std::set methods
 **Capacity:** Used to operate on the capacity of a certain set.
+
 1. [size()](http://www.cplusplus.com/reference/set/set/size/)  – Returns the number of elements in the set.
 2. [max_size()](http://www.cplusplus.com/reference/set/set/max_size/)  – Returns the maximum number of elements that the set can hold.
 3. [empty()](http://www.cplusplus.com/reference/set/set/empty/)  – Returns whether the set is empty.
 
 **Modifiers:** Used to modify a certain set.
+
 4. [insert(const g)](http://www.cplusplus.com/reference/set/set/insert/)  – Adds a new element ‘g’ to the set.
 5. [insert (iterator position, const g)](http://www.cplusplus.com/reference/set/set/insert/)  – Adds a new element ‘g’ at the position pointed by iterator.
 6. [erase(iterator position)](http://www.cplusplus.com/reference/set/set/erase/)  – Removes the element at the position pointed by the iterator.
@@ -360,10 +366,12 @@ Aliased as member type  set::allocator_type.
 11. [emplace_hint()](http://www.cplusplus.com/reference/set/set/emplace_hint/)– Returns an iterator pointing to the position where the insertion is done. If the element passed in the parameter already exists, then it returns an iterator pointing to the position where the existing element is.
 
 **Observers:** Used to do observations such as comparing.
+
 12. [key_comp()](http://www.cplusplus.com/reference/set/set/key_comp/) - Returns the object that determines how the keys in the set are ordered (‘<‘ by default).
 13. [value_comp()](http://www.cplusplus.com/reference/set/set/value_comp/) – Returns the object that determines how the elements in the set are ordered (‘<‘ by default).
 
 **Operations:** Used to do certain operations on the set.
+
 14. [find(const g)](http://www.cplusplus.com/reference/set/set/find/)  – Returns an iterator to the element ‘g’ in the set if found, else returns the iterator to end.
 15. [count(const g)](http://www.cplusplus.com/reference/set/set/count/)  – Returns 1 or 0 based on the element ‘g’ is present in the set or not.
 16. [lower_bound(const g)](http://www.cplusplus.com/reference/set/set/lower_bound/)  – Returns an iterator to the first element that is equivalent to ‘g’ or definitely will not go before the element ‘g’ in the set.
@@ -373,4 +381,5 @@ Aliased as member type  set::allocator_type.
 > **Note:** Set does not have element access functions.
 
 **Allocator:** Used for dynamic allocation.
+
 19. [get_allocator()](http://www.cplusplus.com/reference/set/set/get_allocator/)– Returns the copy of the allocator object associated with the set.
