@@ -876,3 +876,140 @@ The above code produces following output...
 11. [bad_variant_access](https://en.cppreference.com/w/cpp/utility/variant/bad_variant_access "cpp/utility/variant/bad variant access") - Exception thrown on invalid accesses to the value of a variant.
 
 ## Multi-threading using std::future and std::thread
+C++ STL provides nice functionalities for multi-threading. std::future and std::thread allows us to do multi-threading dynamically. std::future functionalities let's you to do asynchronous operations, where std::thread let's you to do multi-threading.
+
+**std::thread** is the thread class that represents a single thread in C++. To start a thread we simply need to create a new thread object and pass the executing code to be called (i.e, a callable object) into the constructor of the object. Once the object is created a new thread is launched which will execute the code specified in callable.
+
+Now, let's consider the following code...
+
+    #include <iostream>
+	#include <future>
+	#include <chrono>
+
+	int main(int argc, char** argv);
+
+	bool isPrime(int);
+	void sayHello(int);
+
+	class thread_obj {
+		public:
+			void operator()(int n) {
+				for(register int i = 0; i < n; i++)
+					std::cout << "An Object operator." << std::endl;
+			}
+	};
+
+	int main(int argc, char** argv) {
+		using namespace std;
+
+		cout << "Binary source: " << argv[0] << endl << endl;
+		cout << "Example of Standard Template Library Future." << endl << endl;
+
+		cout << "Asynchronous function calls." << endl << endl;
+
+		int num = 444444443;
+
+		future<bool> futs = async(isPrime, num);
+
+		cout << "Checking, please wait" << endl;
+
+		while(futs.wait_for(chrono::milliseconds(200)) == future_status::timeout)
+			cout << "." << flush;
+
+		cout << num << " " << (futs.get() ? "is" : "is not") << " prime." << endl;
+
+		cout << endl << "THREAD EXAMPLE" << endl << endl;
+	
+		thread t1(sayHello, 10);
+		thread t2(thread_obj(), 10);
+		thread t3([](int n) {
+			for(register int i = 0; i < n; i++)
+				cout << "A lambda expression." << endl;
+		}, 10);
+
+		t1.join();
+		t2.join();
+		t3.join();
+
+		return 0;
+	}
+
+	bool isPrime(int n) {
+		for(register int i = 2; i < n; i++)
+			if(n % i == 0)
+				return false;
+	
+		return true;
+	}
+
+	void sayHello(int n) {
+		for(register int i = 0; i < n; i++)
+			std::cout << "A Regular function." << std::endl;
+	}
+The output of the above code is...
+
+    Binary source: ./future_learn
+
+	Example of Standard Template Library Future.
+
+	Asynchronous function calls.
+
+	Checking, please wait
+	444444443 is prime.
+
+	THREAD EXAMPLE
+
+	A Regular function.
+	A lambda expression.
+	A lambda expression.
+	An Object operator.
+	A Regular function.
+	A Regular function.
+	A Regular function.
+	A Regular function.
+	A Regular function.
+	A Regular function.
+	A Regular function.
+	A Regular function.
+	A Regular function.
+	A lambda expression.An Object operator.
+	An Object operator.
+
+	A lambda expression.
+	A lambda expression.
+	A lambda expression.
+	A lambda expression.
+	A lambda expression.
+	A lambda expression.
+	A lambda expression.
+	An Object operator.
+	An Object operator.
+	An Object operator.
+	An Object operator.
+	An Object operator.
+	An Object operator.
+	An Object operator.
+***std::future***
+
+	template<class T> class future;
+	template<class T> class future<T&>;
+	template<> class future<void>;
+	
+### Short description of std::future methods and classes
+**Getting the result:**
+
+1. [get()](https://en.cppreference.com/w/cpp/thread/future/get) - Returns the result performed by the run function.
+
+**State:**
+
+2. [valid()](https://en.cppreference.com/w/cpp/thread/future/valid) - Checks if the future has a shared state.
+
+3. [wait()](https://en.cppreference.com/w/cpp/thread/future/wait) - Waits for the result to become available.
+
+4. [wait_for()](https://en.cppreference.com/w/cpp/thread/future/wait_for) - Waits for the result, returns if it is not available for the specified timeout duration.
+
+5. [wait_until()](https://en.cppreference.com/w/cpp/thread/future/wait_until) - Waits for the result, returns if it is not available until specified time point has been reached.
+
+> References taken from [www.geeksforgeeks.org](https://www.geeksforgeeks.org/) and [en.cppreference.com/](https://en.cppreference.com/w/cpp/thread/future).
+
+***Thanks for reading this article...***
