@@ -1010,6 +1010,6 @@ The output of the above code is...
 
 5. [wait_until()](https://en.cppreference.com/w/cpp/thread/future/wait_until) - Waits for the result, returns if it is not available until specified time point has been reached.
 
-> References taken from [www.geeksforgeeks.org](https://www.geeksforgeeks.org/) and [en.cppreference.com/](https://en.cppreference.com/w/cpp/thread/future).
+> References taken from [www.geeksforgeeks.org](https://www.geeksforgeeks.org/) and [en.cppreference.com](https://en.cppreference.com/w/cpp/thread/future).
 
 ***Thanks for reading this article...***
