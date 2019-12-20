@@ -378,7 +378,7 @@ Aliased as member type  set::allocator_type.
 17. [upper_bound(const g)](http://www.cplusplus.com/reference/set/set/upper_bound/)  – Returns an iterator to the first element that is equivalent to ‘g’ or definitely will go after the element ‘g’ in the set.
 18. [equal_range()](http://www.cplusplus.com/reference/set/set/equal_range/)– The function returns an iterator of pairs. (key_comp). The pair refers to the range that includes all the elements in the container which have a key equivalent to k.
 
-> **Note:** Set does not have element access functions.
+> **Note:** std::set does not have element access functions.
 
 **Allocator:** Used for dynamic allocation.
 
