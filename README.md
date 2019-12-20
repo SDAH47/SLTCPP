@@ -549,7 +549,7 @@ The result of above example is...
               class Alloc = allocator<pair<const Key,T> >    // map::allocator_type
             > class map;
 ***Description of template parameters:***
-1. **Key: ** Type of the  _keys_. Each element in a  map  is uniquely identified by its key value.  
+1. **Key:** Type of the  _keys_. Each element in a  map  is uniquely identified by its key value.  
 Aliased as member type  map::key_type.
 
 2. **T:** Type of the mapped value. Each element in a  map  stores some data as its mapped value.  
@@ -615,3 +615,264 @@ Aliased as member type  map::allocator_type.
 27. [get_allocator()](http://www.cplusplus.com/reference/map/map/get_allocator/)– Returns the copy of the allocator object associated with the map.
 
 ## Binary manipulation with std::bitset
+If anybody tells me to work with binaries, my first choice will be std::bitset. std::bitset is used to manipulate binary numbers, where every numbers are known as **bits**. **A bitset is an array of bool but each Boolean value is not stored separately instead bitset optimizes the space such that each bool takes 1 bit space only.** So, **space taken by bitset bs is less than that of bool bs[N] and vector bs(N)**. However, a limitation of bitset is, **N must be known at compile time, i.e. a constant** (this limitation is not there with vector and dynamic array).
+
+As bitset stores the same information in compressed manner the operation on bitset are faster than that of array and vector. We can access each bit of bitset individually with help of array indexing operator [] that is bs[3] shows bit at index 3 of bitset bs just like a simple array. Remember bitset starts its indexing backward that is for 10110, 0 are at 0th and 3rd indices whereas 1 are at 1st 2nd and 4th indices.  
+We can construct a bitset using integer number as well as binary string via constructors which is shown in below code. The size of bitset is fixed at compile time that is, it can’t be changed at runtime.
+
+Let's consider following example of std::bitset...
+
+    #include <iostream>
+	#include <bitset>
+
+	#define LIMIT 32
+
+	int main(int argc, char** argv);
+
+	int main(int argc, char** argv) {
+		using namespace std;
+
+		ios_base::sync_with_stdio(false);
+		cin.tie(NULL);
+
+		cout << "Binary source: " << argv[0] << endl << endl;
+		cout << "Example of Standard Template Library Bitset." << endl << endl;
+
+		bitset<LIMIT> bset1;				// An empty bitset.
+		bitset<LIMIT> bset2(7);				// Binary set of number 7.
+		bitset<LIMIT> bset3(string("1101"));	// String representation of binary 13.
+
+		cout << "Empty bitset: " << bset1 << endl;
+		cout << "Bitset representing number 7: " << bset2 << endl;
+		cout << "Bitset of 13(Represented with string): " << bset3 << endl << endl;
+
+		bitset<8> bset8b;
+
+		bset8b[0] = 1;		// 00000001;
+		bset8b.set(4, 1);	// 00010001; Alternative: bitset<LIMIT> set(pos, b) { *this[pos] = b; return *this; }
+
+		cout << bset8b << endl;
+
+		size_t numb1 = bset8b.count();
+
+		cout << "bset8b has " << numb1 << " set(1) and " << (bset8b.size() - numb1) << " unset(0)." << endl << endl;
+
+		if(!bset1.any())
+			cout << "bset1 has no set(1) bits." << endl;
+
+		if(!bset2.none())
+			cout << "bset2 has at least 1 bit set(1)." << endl;
+
+		cout << endl << "After setting all the bits in bset1..." << endl;
+		cout << bset1.set() << endl;
+
+		cout << endl << "Reseting all the bits of bset8b." << endl;
+		cout << bset8b.reset() << endl << endl;
+
+		// reset(pos, b) and reset(pos) does the opposite of set(pos, b) and set(pos).
+
+		cout << "A Decimal: " << 100 << ", Binary representation: " << bitset<8>(100) << endl << endl;
+
+		cout << "\tLOGICAL OPERATIONS" << endl << endl;
+
+		bitset<4> bsetm(9); // bset1 contains 1001
+		bitset<4> bsetn(3); // bset2 contains 0011
+
+		// comparison operator
+		cout << (bsetm == bsetn) << endl; // false 0
+		cout << (bsetm != bsetn) << endl; // true  1
+
+		// left and right shifting
+		cout << (bsetm << 2) << endl; // 1100
+		cout << (bsetm >> 1) << endl; // 0110
+
+		// not operator
+		cout << (~bsetn) << endl; // 1100
+
+		// bitwise operator
+		cout << (bsetm & bsetn) << endl; // 0010
+		cout << (bsetm | bsetn) << endl; // 0111
+		cout << (bsetm ^ bsetn) << endl; // 0101
+
+	    return 0;
+	}
+The output of above example is...
+
+    Binary source: ./bitset_learn
+
+	Example of Standard Template Library Bitset.
+
+	Empty bitset: 00000000000000000000000000000000
+	Bitset representing number 7: 00000000000000000000000000000111
+	Bitset of 13(Represented with string): 00000000000000000000000000001101
+
+	00010001
+	bset8b has 2 set(1) and 6 unset(0).
+
+	bset1 has no set(1) bits.
+	bset2 has at least 1 bit set(1).
+
+	After setting all the bits in bset1...
+	11111111111111111111111111111111
+
+	Reseting all the bits of bset8b.
+	00000000
+
+	A Decimal: 100, Binary representation: 01100100
+
+	        LOGICAL OPERATIONS
+
+	0
+	1
+	0100
+	0100
+	1100
+	0001
+	1011
+	1010
+***std::bitset***
+
+    template <size_t N> class bitset;
+***Description of template parameters:***
+1. **N:** Size of the bitset, in terms of number of bits.  
+It is returned by member function  [bitset::size](http://www.cplusplus.com/bitset::size).  
+[size_t](http://www.cplusplus.com/size_t)  is an unsigned integral type.
+
+### Short description of std::bitset methods
+**Bit Access:** Used to access bits from bitset.
+
+1. [operator[]](http://www.cplusplus.com/reference/bitset/bitset/operator[]/) - Access bit starting from end of the bitset.
+
+2. [count()](http://www.cplusplus.com/reference/bitset/bitset/count/) - Counts total number of set(1) bits.
+
+3. [size()](http://www.cplusplus.com/reference/bitset/bitset/size/) - Returns number of bits in a bitset.
+
+4. [test(pos)](http://www.cplusplus.com/reference/bitset/bitset/test/) - Returns whether the bit at position pos is set (i.e., whether it is _one_).
+
+5. [any()](http://www.cplusplus.com/reference/bitset/bitset/any/) - Returns whether any of the bits is set(1).
+
+
+6. [none()](http://www.cplusplus.com/reference/bitset/bitset/none/) - Test if no bit is set(1).
+
+7. [all()](http://www.cplusplus.com/reference/bitset/bitset/all/) - Test if all bits are set
+
+** Bit operations: ** Used to do bit operations in a certain bitset.
+
+8. [set()](http://www.cplusplus.com/reference/bitset/bitset/set/) - Sets a bit in the sequence of bitset counting the index from the last.
+
+9. [reset()](http://www.cplusplus.com/reference/bitset/bitset/reset/) - Resets a bit in the sequence of bitset counting the index from the last.
+
+10. [flip()](http://www.cplusplus.com/reference/bitset/bitset/flip/) - Flips a bit of the bitset. i.e., bs.flip(2), Flips 1 to 0 or 0 to 1 of the index 2, counting from the last.
+
+**Bitset operations:** Bitset class operations.
+
+11. [to_string()](http://www.cplusplus.com/reference/bitset/bitset/to_string/) - Converts a bitset to string.
+
+12. [to_ulong()](http://www.cplusplus.com/reference/bitset/bitset/to_ulong/) - Converts a bitset to unsigned long integer.
+
+13. [to_ullong()](http://www.cplusplus.com/reference/bitset/bitset/to_ullong/) - Converts a bitset to unsigned long long integer.
+
+## Multiple Data-Types with std::variant
+> **Warning:**  std::variant is available on C++17.
+> 
+To handle multiple datatype in C++ in one variable, C++ STL provides a wonderful feature named std::variant. **The class template `std::variant` represents a type-safe [union](https://en.cppreference.com/w/cpp/language/union)**. An instance of `std::variant` at any given time either holds a value of one of its alternative types, or in the case of error - no value (this state is hard to achieve, see [valueless_by_exception](https://en.cppreference.com/w/cpp/utility/variant/valueless_by_exception "cpp/utility/variant/valueless by exception")).
+
+> **Note:** Use std::get function to access values from std::variant. May throw [std::bad_variant_access](https://en.cppreference.com/w/cpp/utility/variant/bad_variant_access), for incorrect variant access.
+
+Let's consider following example...
+
+    #include <iostream>
+	#include <variant>
+	#include <string>
+	#include <cassert>
+
+	int main(int argc, char** argv);
+
+	int main(int argc, char** argv) {
+		using namespace std;
+
+		ios_base::sync_with_stdio(false);
+		cin.tie(NULL);
+
+		cout << "Binary source: " << argv[0] << endl << endl;
+		cout << "Example of Standard Template Library Variant." << endl << endl;
+
+	    variant<int, string> v1, v2;
+
+	    v1 = 100;
+	    v2 = "SDAH";
+	    v1 = get<string>(v2);
+	    v2 = 100;
+
+	    cout << "V1 holds: " << get<string>(v1) << ", V2 holds: " << get<int>(v2) << endl;
+
+	    // Bad_variant_access...
+	    try {
+		    get<int>(v1);
+	    } catch(bad_variant_access&) {}
+
+	    using namespace string_literals;
+
+	    // Example of void const* with string.
+
+	    variant<string, void const*> anVar("SDAH");
+
+	    assert(holds_alternative<void const*>(anVar));	// Will succeed.
+
+	    // Conversion constructor.
+	    anVar = "SDAH"s;
+
+	    assert(holds_alternative<string>(anVar));		// Will succeed.
+
+	    return 0;
+	}
+The above code produces following output...
+
+    Binary source: E:\Project1\x64\Debug\Project1.exe
+
+	Example of Standard Template Library Variant.
+
+	V1 holds: SDAH, V2 holds: 100
+***std::variant***
+
+    template <class... Types> class variant;		// Since C++17
+    
+***Description template parameter:***
+
+1. **Types:**  The types that may be stored in this variant. All types must be (possibly cv-qualified) non-array object types.
+
+### Short description of std::variant methods and classes
+**Observers**: Does Observation operation 
+
+1. [index()](https://en.cppreference.com/w/cpp/utility/variant/index) - Returns the zero-based index of the alternative held by the variant.
+
+2. [valueless_by_exception](https://en.cppreference.com/w/cpp/utility/variant/valueless_by_exception) - Checks if the variant is in the invalid state.
+
+**Modifiers:** Modifies std::variant.
+
+3. [emplace()](https://en.cppreference.com/w/cpp/utility/variant/emplace) - Constructs a value in the variant, in place.
+
+4. [swap()](https://en.cppreference.com/w/cpp/utility/variant/swap) - Swaps with another variant.
+
+**Non-member functions:** std::variant non-member function needed to perform std::variant operations.
+
+5. [visit()](https://en.cppreference.com/w/cpp/utility/variant/visit) - Calls the provided functor with the arguments held by one or more variants  
+(function template)
+
+6. [holds_alternative()](https://en.cppreference.com/w/cpp/utility/variant/holds_alternative) - Checks if a variant currently holds a given type  
+(function template)
+
+7. [std::get<>(std::variant)](https://en.cppreference.com/w/cpp/utility/variant/get) - Reads the value of the variant given the index or the type (if the type is unique), throws on error  
+(function template)
+
+8. [get_if()](https://en.cppreference.com/w/cpp/utility/variant/get_if) - Obtains a pointer to the value of a pointed-to variant given the index or the type (if unique), returns null on error (function template).
+
+9. [std::swap(std::variant)](https://en.cppreference.com/w/cpp/utility/variant/swap2) - pecializes the  [std::swap](https://en.cppreference.com/w/cpp/algorithm/swap "cpp/algorithm/swap")  algorithm (function).
+
+**Helper classes:** For working with std::variant.
+
+10. [monostate](https://en.cppreference.com/w/cpp/utility/variant/monostate) - Placeholder type for use as the first alternative in a variant of non-default-constructible types.
+
+11. [bad_variant_access](https://en.cppreference.com/w/cpp/utility/variant/bad_variant_access "cpp/utility/variant/bad variant access") - Exception thrown on invalid accesses to the value of a variant.
+
+## Multi-threading using std::future and std::thread
