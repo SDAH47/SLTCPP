@@ -754,9 +754,9 @@ It is returned by member function  [bitset::size](http://www.cplusplus.com/bitse
 
 6. [none()](http://www.cplusplus.com/reference/bitset/bitset/none/) - Test if no bit is set(1).
 
-7. [all()](http://www.cplusplus.com/reference/bitset/bitset/all/) - Test if all bits are set
+7. [all()](http://www.cplusplus.com/reference/bitset/bitset/all/) - Test if all bits are set(1).
 
-** Bit operations: ** Used to do bit operations in a certain bitset.
+**Bit operations:** Used to do bit operations in a certain bitset.
 
 8. [set()](http://www.cplusplus.com/reference/bitset/bitset/set/) - Sets a bit in the sequence of bitset counting the index from the last.
 
